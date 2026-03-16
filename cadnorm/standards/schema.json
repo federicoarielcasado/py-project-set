@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cadnorm/standards/schema.json",
+  "title": "CADNorm Normative Profile Schema",
+  "description": "Schema de validación para perfiles normativos de CADNorm. Cubre todos los parámetros configurables en archivos CAD (capas, estilos, cotas, escalas, layouts, rótulo, hachurados).",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["metadata", "units", "layers", "linetypes", "text_styles", "dim_styles", "drawing_scales", "paper_sizes", "title_block", "hatch_patterns", "plot_config"],
+  "additionalProperties": false,
+
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "description": "Identificación y trazabilidad del perfil normativo.",
+      "required": ["standard_name", "standard_version", "effective_date", "source", "profile_version", "software_targets"],
+      "additionalProperties": false,
+      "properties": {
+        "standard_name":    { "type": "string", "description": "Nombre de la norma (ej: IRAM, ISO, ASME)" },
+        "standard_version": { "type": "string", "description": "Versión o edición de la norma (ej: '2001', '2018')" },
+        "effective_date":   { "type": "string", "format": "date", "description": "Fecha de vigencia de esta edición (ISO 8601)" },
+        "source":           { "type": "string", "description": "Fuente o referencia bibliográfica de los datos" },
+        "profile_version":  { "type": "string", "description": "Versión semántica de este archivo JSON (semver)" },
+        "description":      { "type": "string", "description": "Descripción libre del perfil" },
+        "software_targets": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["autocad", "librecad", "bricscad", "draftsight"] },
+          "minItems": 1,
+          "description": "Softwares CAD para los que aplica este perfil"
+        },
+        "country": { "type": "string", "description": "País o región de la norma (ej: AR, INT, US)" }
+      }
+    },
+
+    "units": {
+      "type": "object",
+      "description": "Configuración de unidades del dibujo.",
+      "required": ["system", "linear_precision", "angular_unit", "angular_precision"],
+      "additionalProperties": false,
+      "properties": {
+        "system":             { "type": "string", "enum": ["metric", "imperial"], "description": "Sistema de unidades" },
+        "linear_unit":        { "type": "string", "enum": ["mm", "cm", "m", "in", "ft"], "description": "Unidad lineal base" },
+        "linear_precision":   { "type": "integer", "minimum": 0, "maximum": 8, "description": "Decimales para distancias" },
+        "angular_unit":       { "type": "string", "enum": ["degrees", "radians", "gradians"], "description": "Unidad angular" },
+        "angular_precision":  { "type": "integer", "minimum": 0, "maximum": 8, "description": "Decimales para ángulos" },
+        "insertion_scale":    { "type": "string", "enum": ["mm", "cm", "m", "in", "ft", "unitless"], "description": "Escala de inserción de bloques" },
+        "measurement_system": { "type": "integer", "enum": [0, 1], "description": "0=Imperial, 1=Metric (variable MEASUREMENT en AutoCAD)" }
+      }
+    },
+
+    "layers": {
+      "type": "array",
+      "description": "Definición de capas del dibujo.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "color_aci", "linetype", "lineweight"],
+        "additionalProperties": false,
+        "properties": {
+          "name":        { "type": "string", "minLength": 1, "maxLength": 255, "description": "Nombre de la capa" },
+          "color_aci":   { "type": "integer", "minimum": 1, "maximum": 256, "description": "Color ACI (AutoCAD Color Index, 1–255; 256=BYLAYER)" },
+          "linetype":    { "type": "string", "description": "Nombre del tipo de línea (debe existir en linetypes[])" },
+          "lineweight":  { "type": "number", "enum": [-3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211], "description": "Espesor de línea en centésimas de mm (-3=DEFAULT,-2=BYLAYER,-1=BYBLOCK)" },
+          "plot":        { "type": "boolean", "default": true, "description": "Si la capa se imprime" },
+          "locked":      { "type": "boolean", "default": false },
+          "frozen":      { "type": "boolean", "default": false },
+          "description": { "type": "string", "description": "Descripción funcional de la capa" },
+          "norm_ref":    { "type": "string", "description": "Referencia al artículo/sección de la norma que define esta capa" }
+        }
+      }
+    },
+
+    "linetypes": {
+      "type": "array",
+      "description": "Tipos de línea utilizados en el perfil.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "name":        { "type": "string", "description": "Nombre del tipo de línea (ej: CONTINUOUS, DASHED)" },
+          "description": { "type": "string", "description": "Descripción en pantalla (ej: '— — — — —')" },
+          "pattern":     { "type": "string", "description": "Patrón en formato DXF LTYPE (ej: 'A,.5,-.25'). Vacío para CONTINUOUS." },
+          "norm_ref":    { "type": "string", "description": "Referencia normativa (ej: IRAM 4504 Art.3)" }
+        }
+      }
+    },
+
+    "text_styles": {
+      "type": "array",
+      "description": "Estilos de texto del dibujo.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "font", "height"],
+        "additionalProperties": false,
+        "properties": {
+          "name":         { "type": "string", "description": "Nombre del estilo de texto" },
+          "font":         { "type": "string", "description": "Archivo de fuente (ej: isocp.shx, romans.shx, Arial.ttf)" },
+          "big_font":     { "type": "string", "description": "Big font para idiomas CJK (opcional)" },
+          "height":       { "type": "number", "minimum": 0, "description": "Altura fija en mm (0=variable)" },
+          "width_factor": { "type": "number", "minimum": 0.1, "maximum": 10, "description": "Factor de ancho (1.0=normal)" },
+          "oblique_angle":{ "type": "number", "minimum": -85, "maximum": 85, "description": "Ángulo de inclinación en grados" },
+          "is_default":   { "type": "boolean", "default": false, "description": "Si es el estilo por defecto del dibujo" },
+          "norm_ref":     { "type": "string" }
+        }
+      }
+    },
+
+    "dim_styles": {
+      "type": "array",
+      "description": "Estilos de cotas (dimensionado).",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {
+          "name":        { "type": "string", "description": "Nombre del estilo de cota" },
+          "dimscale":    { "type": "number", "minimum": 0.001, "description": "Factor de escala global de cotas" },
+          "dimtxt":      { "type": "number", "minimum": 0, "description": "Altura del texto de cota en mm" },
+          "dimexo":      { "type": "number", "minimum": 0, "description": "Offset de línea de extensión desde el objeto" },
+          "dimexe":      { "type": "number", "minimum": 0, "description": "Extensión de línea de extensión más allá de la cota" },
+          "dimasz":      { "type": "number", "minimum": 0, "description": "Tamaño de flecha" },
+          "dimgap":      { "type": "number", "minimum": 0, "description": "Separación entre texto y línea de cota" },
+          "dimdec":      { "type": "integer", "minimum": 0, "maximum": 8, "description": "Decimales del valor de cota" },
+          "dimtih":      { "type": "boolean", "description": "Texto siempre horizontal" },
+          "dimtoh":      { "type": "boolean", "description": "Texto horizontal fuera de extensiones" },
+          "dimblk":      { "type": "string", "description": "Bloque de flecha (vacío=flecha estándar, 'DOT'=punto, 'OBLIQUE'=diagonal)" },
+          "dimclrd":     { "type": "integer", "minimum": 0, "maximum": 256, "description": "Color ACI de líneas de cota" },
+          "dimclre":     { "type": "integer", "minimum": 0, "maximum": 256, "description": "Color ACI de líneas de extensión" },
+          "dimclrt":     { "type": "integer", "minimum": 0, "maximum": 256, "description": "Color ACI del texto de cota" },
+          "dimtxsty":    { "type": "string", "description": "Estilo de texto para cotas" },
+          "dimlunit":    { "type": "integer", "enum": [1, 2, 3, 4, 5, 6], "description": "Unidades lineales: 2=decimal, 4=arquitectónico, etc." },
+          "dimadec":     { "type": "integer", "minimum": 0, "description": "Decimales para cotas angulares" },
+          "is_default":  { "type": "boolean", "default": false },
+          "norm_ref":    { "type": "string" }
+        }
+      }
+    },
+
+    "drawing_scales": {
+      "type": "array",
+      "description": "Escalas normalizadas para el dibujo.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["label", "numerator", "denominator", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "label":       { "type": "string", "description": "Etiqueta en rótulo (ej: '1:50')" },
+          "numerator":   { "type": "number", "exclusiveMinimum": 0, "description": "Numerador de la escala" },
+          "denominator": { "type": "number", "exclusiveMinimum": 0, "description": "Denominador de la escala" },
+          "type":        { "type": "string", "enum": ["reduction", "amplification", "natural"], "description": "Tipo de escala" },
+          "norm_ref":    { "type": "string" }
+        }
+      }
+    },
+
+    "paper_sizes": {
+      "type": "array",
+      "description": "Formatos de papel normalizados.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "width_mm", "height_mm"],
+        "additionalProperties": false,
+        "properties": {
+          "name":          { "type": "string", "description": "Nombre del formato (ej: A4, A3)" },
+          "width_mm":      { "type": "number", "exclusiveMinimum": 0, "description": "Ancho en mm (lado corto si es vertical)" },
+          "height_mm":     { "type": "number", "exclusiveMinimum": 0, "description": "Alto en mm" },
+          "margin_left":   { "type": "number", "minimum": 0, "description": "Margen izquierdo en mm (encuadernación)" },
+          "margin_right":  { "type": "number", "minimum": 0 },
+          "margin_top":    { "type": "number", "minimum": 0 },
+          "margin_bottom": { "type": "number", "minimum": 0 },
+          "orientation":   { "type": "string", "enum": ["landscape", "portrait"], "default": "landscape" },
+          "norm_ref":      { "type": "string" }
+        }
+      }
+    },
+
+    "title_block": {
+      "type": "object",
+      "description": "Configuración del rótulo de plano.",
+      "required": ["fields"],
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "type": "array",
+          "description": "Campos del rótulo.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "required"],
+            "additionalProperties": false,
+            "properties": {
+              "id":           { "type": "string", "description": "Identificador interno del campo" },
+              "label":        { "type": "string", "description": "Etiqueta visible en el rótulo" },
+              "required":     { "type": "boolean", "description": "Si el campo es obligatorio según la norma" },
+              "default":      { "type": "string", "description": "Valor por defecto (puede ser vacío)" },
+              "max_length":   { "type": "integer", "minimum": 1, "description": "Longitud máxima del contenido" },
+              "norm_ref":     { "type": "string" }
+            }
+          }
+        },
+        "norm_ref": { "type": "string" }
+      }
+    },
+
+    "hatch_patterns": {
+      "type": "array",
+      "description": "Patrones de hachurado normalizados.",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "name":        { "type": "string", "description": "Nombre del patrón de hachura (ej: ANSI31)" },
+          "description": { "type": "string", "description": "Material o uso representado" },
+          "angle":       { "type": "number", "description": "Ángulo de aplicación en grados" },
+          "scale":       { "type": "number", "exclusiveMinimum": 0, "description": "Escala de aplicación" },
+          "norm_ref":    { "type": "string" }
+        }
+      }
+    },
+
+    "plot_config": {
+      "type": "object",
+      "description": "Configuración de impresión y presentación.",
+      "required": ["plot_style_type"],
+      "additionalProperties": false,
+      "properties": {
+        "plot_style_type": { "type": "string", "enum": ["ctb", "stb"], "description": "Tipo de tabla de estilos de impresión" },
+        "plot_style_file": { "type": "string", "description": "Nombre del archivo CTB/STB a usar" },
+        "plot_area":       { "type": "string", "enum": ["layout", "extents", "limits", "display", "window"], "description": "Área de impresión" },
+        "scale_to_paper":  { "type": "boolean", "description": "Escalar al papel" },
+        "center_plot":     { "type": "boolean", "description": "Centrar en papel" },
+        "plot_hidden":     { "type": "boolean", "description": "Imprimir líneas ocultas" },
+        "lineweight_scale":{ "type": "number", "minimum": 0, "description": "Factor de escala para espesores de línea en impresión" },
+        "norm_ref":        { "type": "string" }
+      }
+    }
+
+  }
+}

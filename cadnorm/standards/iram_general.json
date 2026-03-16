@@ -1,0 +1,436 @@
+{
+  "metadata": {
+    "standard_name": "IRAM",
+    "standard_version": "2001",
+    "effective_date": "2001-01-01",
+    "source": "IRAM 4503:2001 - Dibujo técnico. Formatos. IRAM 4504 - Tipos de línea. IRAM 4040 - Escalas. IRAM 4508 - Escritura. IRAM 4049 - Acotamiento.",
+    "profile_version": "1.0.0",
+    "description": "Perfil normativo IRAM para dibujo técnico de ingeniería civil y arquitectura. Cubre formatos A0-A4, tipos de línea ISO, escritura normalizada y acotamiento IRAM 4503.",
+    "software_targets": ["autocad", "librecad"],
+    "country": "AR"
+  },
+
+  "units": {
+    "system": "metric",
+    "linear_unit": "mm",
+    "linear_precision": 2,
+    "angular_unit": "degrees",
+    "angular_precision": 0,
+    "insertion_scale": "mm",
+    "measurement_system": 1
+  },
+
+  "linetypes": [
+    {
+      "name": "CONTINUOUS",
+      "description": "Línea continua",
+      "pattern": "",
+      "norm_ref": "IRAM 4504 Tipo A"
+    },
+    {
+      "name": "DASHED",
+      "description": "Línea a trazos (oculta) — — — — —",
+      "pattern": "A,.5,-.25",
+      "norm_ref": "IRAM 4504 Tipo E"
+    },
+    {
+      "name": "CENTER",
+      "description": "Línea de eje — · — · — · —",
+      "pattern": "A,1,-.25,.25,-.25",
+      "norm_ref": "IRAM 4504 Tipo G"
+    },
+    {
+      "name": "PHANTOM",
+      "description": "Línea fantasma — · · — · · —",
+      "pattern": "A,1.25,-.25,.25,-.25,.25,-.25",
+      "norm_ref": "IRAM 4504 Tipo H"
+    },
+    {
+      "name": "CUTTING_PLANE",
+      "description": "Plano de corte — — — · — — —",
+      "pattern": "A,1,-.25,.25,-.25",
+      "norm_ref": "IRAM 4504 Tipo J"
+    }
+  ],
+
+  "layers": [
+    {
+      "name": "0",
+      "color_aci": 7,
+      "linetype": "CONTINUOUS",
+      "lineweight": -2,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Capa base del sistema (no modificar)"
+    },
+    {
+      "name": "VP-VISIBLE",
+      "color_aci": 7,
+      "linetype": "CONTINUOUS",
+      "lineweight": 50,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Líneas visibles principales — contornos de piezas y objetos",
+      "norm_ref": "IRAM 4504 Tipo A — espesor grueso 0.5mm"
+    },
+    {
+      "name": "VL-VISIBLE-FINA",
+      "color_aci": 7,
+      "linetype": "CONTINUOUS",
+      "lineweight": 25,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Líneas visibles finas — aristas secundarias, trayectorias",
+      "norm_ref": "IRAM 4504 Tipo B — espesor fino 0.25mm"
+    },
+    {
+      "name": "OC-OCULTA",
+      "color_aci": 2,
+      "linetype": "DASHED",
+      "lineweight": 25,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Líneas ocultas — aristas no visibles",
+      "norm_ref": "IRAM 4504 Tipo E — amarillo, a trazos"
+    },
+    {
+      "name": "EJ-EJE",
+      "color_aci": 1,
+      "linetype": "CENTER",
+      "lineweight": 13,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Ejes de simetría y de revolución",
+      "norm_ref": "IRAM 4504 Tipo G — rojo, trazo-punto"
+    },
+    {
+      "name": "CO-COTA",
+      "color_aci": 3,
+      "linetype": "CONTINUOUS",
+      "lineweight": 13,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Cotas, líneas de extensión y auxiliares de acotamiento",
+      "norm_ref": "IRAM 4049 — verde, línea fina"
+    },
+    {
+      "name": "CRT-CORTE",
+      "color_aci": 6,
+      "linetype": "CONTINUOUS",
+      "lineweight": 50,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Planos de corte y sección — trazado visible en vista de corte",
+      "norm_ref": "IRAM 4504 Tipo J — magenta"
+    },
+    {
+      "name": "AN-ANOTACION",
+      "color_aci": 4,
+      "linetype": "CONTINUOUS",
+      "lineweight": 13,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Textos, notas, símbolos y referencias",
+      "norm_ref": "IRAM 4508 — cian, línea fina"
+    },
+    {
+      "name": "HT-HACHURA",
+      "color_aci": 8,
+      "linetype": "CONTINUOUS",
+      "lineweight": 9,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Hachurados de cortes y secciones",
+      "norm_ref": "IRAM 4504 — gris, línea muy fina"
+    },
+    {
+      "name": "MA-MARCO",
+      "color_aci": 7,
+      "linetype": "CONTINUOUS",
+      "lineweight": 70,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Marco del plano y borde exterior",
+      "norm_ref": "IRAM 4503 — espesor 0.7mm"
+    },
+    {
+      "name": "RT-ROTULO",
+      "color_aci": 7,
+      "linetype": "CONTINUOUS",
+      "lineweight": 25,
+      "plot": true,
+      "locked": false,
+      "frozen": false,
+      "description": "Rótulo y carátula del plano",
+      "norm_ref": "IRAM 4503"
+    },
+    {
+      "name": "REF-REFERENCIA",
+      "color_aci": 5,
+      "linetype": "CONTINUOUS",
+      "lineweight": 13,
+      "plot": false,
+      "locked": false,
+      "frozen": false,
+      "description": "Geometría de referencia y construcción (no imprime)",
+      "norm_ref": "Uso interno — azul, no plot"
+    }
+  ],
+
+  "text_styles": [
+    {
+      "name": "IRAM_STD",
+      "font": "isocp.shx",
+      "height": 0,
+      "width_factor": 1.0,
+      "oblique_angle": 0,
+      "is_default": true,
+      "norm_ref": "IRAM 4508 — fuente ISO normalizada, altura variable"
+    },
+    {
+      "name": "IRAM_H25",
+      "font": "isocp.shx",
+      "height": 2.5,
+      "width_factor": 1.0,
+      "oblique_angle": 0,
+      "is_default": false,
+      "norm_ref": "IRAM 4508 — altura 2.5mm (mínima normalizada)"
+    },
+    {
+      "name": "IRAM_H35",
+      "font": "isocp.shx",
+      "height": 3.5,
+      "width_factor": 1.0,
+      "oblique_angle": 0,
+      "is_default": false,
+      "norm_ref": "IRAM 4508 — altura 3.5mm"
+    },
+    {
+      "name": "IRAM_H50",
+      "font": "isocp.shx",
+      "height": 5.0,
+      "width_factor": 1.0,
+      "oblique_angle": 0,
+      "is_default": false,
+      "norm_ref": "IRAM 4508 — altura 5.0mm (títulos)"
+    },
+    {
+      "name": "IRAM_H70",
+      "font": "isocp.shx",
+      "height": 7.0,
+      "width_factor": 1.0,
+      "oblique_angle": 0,
+      "is_default": false,
+      "norm_ref": "IRAM 4508 — altura 7.0mm (encabezados principales)"
+    }
+  ],
+
+  "dim_styles": [
+    {
+      "name": "IRAM_STANDARD",
+      "dimscale": 1.0,
+      "dimtxt": 2.5,
+      "dimexo": 1.5,
+      "dimexe": 2.0,
+      "dimasz": 2.5,
+      "dimgap": 1.0,
+      "dimdec": 2,
+      "dimtih": false,
+      "dimtoh": false,
+      "dimblk": "",
+      "dimclrd": 3,
+      "dimclre": 3,
+      "dimclrt": 3,
+      "dimtxsty": "IRAM_H25",
+      "dimlunit": 2,
+      "dimadec": 0,
+      "is_default": true,
+      "norm_ref": "IRAM 4049 — acotamiento normalizado"
+    }
+  ],
+
+  "drawing_scales": [
+    { "label": "1:1",   "numerator": 1,  "denominator": 1,   "type": "natural",       "norm_ref": "IRAM 4040" },
+    { "label": "1:2",   "numerator": 1,  "denominator": 2,   "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:5",   "numerator": 1,  "denominator": 5,   "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:10",  "numerator": 1,  "denominator": 10,  "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:20",  "numerator": 1,  "denominator": 20,  "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:25",  "numerator": 1,  "denominator": 25,  "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:50",  "numerator": 1,  "denominator": 50,  "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:75",  "numerator": 1,  "denominator": 75,  "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:100", "numerator": 1,  "denominator": 100, "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:200", "numerator": 1,  "denominator": 200, "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "1:500", "numerator": 1,  "denominator": 500, "type": "reduction",     "norm_ref": "IRAM 4040" },
+    { "label": "2:1",   "numerator": 2,  "denominator": 1,   "type": "amplification", "norm_ref": "IRAM 4040" },
+    { "label": "5:1",   "numerator": 5,  "denominator": 1,   "type": "amplification", "norm_ref": "IRAM 4040" },
+    { "label": "10:1",  "numerator": 10, "denominator": 1,   "type": "amplification", "norm_ref": "IRAM 4040" }
+  ],
+
+  "paper_sizes": [
+    {
+      "name": "A4",
+      "width_mm": 210,
+      "height_mm": 297,
+      "margin_left": 25,
+      "margin_right": 5,
+      "margin_top": 5,
+      "margin_bottom": 5,
+      "orientation": "portrait",
+      "norm_ref": "IRAM 4503 — formato A4"
+    },
+    {
+      "name": "A4H",
+      "width_mm": 297,
+      "height_mm": 210,
+      "margin_left": 25,
+      "margin_right": 5,
+      "margin_top": 5,
+      "margin_bottom": 5,
+      "orientation": "landscape",
+      "norm_ref": "IRAM 4503 — formato A4 apaisado"
+    },
+    {
+      "name": "A3",
+      "width_mm": 420,
+      "height_mm": 297,
+      "margin_left": 25,
+      "margin_right": 5,
+      "margin_top": 5,
+      "margin_bottom": 5,
+      "orientation": "landscape",
+      "norm_ref": "IRAM 4503 — formato A3"
+    },
+    {
+      "name": "A2",
+      "width_mm": 594,
+      "height_mm": 420,
+      "margin_left": 25,
+      "margin_right": 5,
+      "margin_top": 5,
+      "margin_bottom": 5,
+      "orientation": "landscape",
+      "norm_ref": "IRAM 4503 — formato A2"
+    },
+    {
+      "name": "A1",
+      "width_mm": 841,
+      "height_mm": 594,
+      "margin_left": 25,
+      "margin_right": 5,
+      "margin_top": 5,
+      "margin_bottom": 5,
+      "orientation": "landscape",
+      "norm_ref": "IRAM 4503 — formato A1"
+    },
+    {
+      "name": "A0",
+      "width_mm": 1189,
+      "height_mm": 841,
+      "margin_left": 25,
+      "margin_right": 5,
+      "margin_top": 5,
+      "margin_bottom": 5,
+      "orientation": "landscape",
+      "norm_ref": "IRAM 4503 — formato A0"
+    }
+  ],
+
+  "title_block": {
+    "norm_ref": "IRAM 4503 — rótulo normalizado",
+    "fields": [
+      { "id": "company",      "label": "Empresa / Estudio",   "required": false, "default": "",  "max_length": 60 },
+      { "id": "project",      "label": "Proyecto / Obra",     "required": true,  "default": "",  "max_length": 80 },
+      { "id": "title",        "label": "Título del Plano",    "required": true,  "default": "",  "max_length": 100 },
+      { "id": "drawing_no",   "label": "Número de Plano",     "required": true,  "default": "",  "max_length": 20 },
+      { "id": "scale",        "label": "Escala",              "required": true,  "default": "1:50", "max_length": 10, "norm_ref": "IRAM 4040" },
+      { "id": "date",         "label": "Fecha",               "required": true,  "default": "",  "max_length": 10 },
+      { "id": "drawn_by",     "label": "Dibujó",              "required": true,  "default": "",  "max_length": 40 },
+      { "id": "checked_by",   "label": "Verificó",            "required": false, "default": "",  "max_length": 40 },
+      { "id": "approved_by",  "label": "Aprobó",              "required": false, "default": "",  "max_length": 40 },
+      { "id": "revision",     "label": "Revisión",            "required": true,  "default": "A", "max_length": 5 },
+      { "id": "sheet",        "label": "Hoja",                "required": true,  "default": "1/1", "max_length": 10 },
+      { "id": "standard",     "label": "Norma",               "required": false, "default": "IRAM", "max_length": 20 },
+      { "id": "notes",        "label": "Notas",               "required": false, "default": "",  "max_length": 200 }
+    ]
+  },
+
+  "hatch_patterns": [
+    {
+      "name": "ANSI31",
+      "description": "Hierro / Material general (líneas a 45°)",
+      "angle": 45,
+      "scale": 1.0,
+      "norm_ref": "IRAM 4506 / ISO 128-50"
+    },
+    {
+      "name": "ANSI32",
+      "description": "Acero",
+      "angle": 45,
+      "scale": 1.0,
+      "norm_ref": "IRAM 4506 / ISO 128-50"
+    },
+    {
+      "name": "ANSI37",
+      "description": "Bronce / Latón / Cobre",
+      "angle": 45,
+      "scale": 1.0,
+      "norm_ref": "IRAM 4506"
+    },
+    {
+      "name": "AR-CONC",
+      "description": "Hormigón / Concreto",
+      "angle": 0,
+      "scale": 1.0,
+      "norm_ref": "IRAM 4506"
+    },
+    {
+      "name": "AR-SAND",
+      "description": "Tierra / Suelo natural",
+      "angle": 0,
+      "scale": 1.0,
+      "norm_ref": "IRAM 4506"
+    },
+    {
+      "name": "BRICK",
+      "description": "Mampostería de ladrillos",
+      "angle": 0,
+      "scale": 1.0,
+      "norm_ref": "IRAM 4506"
+    },
+    {
+      "name": "GLASS",
+      "description": "Vidrio",
+      "angle": 45,
+      "scale": 1.0,
+      "norm_ref": "IRAM 4506"
+    },
+    {
+      "name": "WOOD",
+      "description": "Madera (veta longitudinal)",
+      "angle": 0,
+      "scale": 1.0,
+      "norm_ref": "IRAM 4506"
+    }
+  ],
+
+  "plot_config": {
+    "plot_style_type": "ctb",
+    "plot_style_file": "monochrome.ctb",
+    "plot_area": "layout",
+    "scale_to_paper": false,
+    "center_plot": true,
+    "plot_hidden": false,
+    "lineweight_scale": 1.0,
+    "norm_ref": "IRAM 4503 — impresión monocromática por defecto"
+  }
+}

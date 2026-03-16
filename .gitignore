@@ -1,0 +1,67 @@
+# Archivos de contexto de IA (no pertenecen al repositorio público)
+CLAUDE.md
+claude.md
+.claude/
+
+# Archivos generados por CADNorm
+output/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+.eggs/
+
+# Entornos virtuales
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Cobertura y tests
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+coverage.xml
+*.cover
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Base de datos local
+*.db
+*.sqlite
+*.sqlite3
+
+# Distribución empaquetada
+*.spec
+dist/
+build/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
