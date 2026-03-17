@@ -186,6 +186,10 @@
       "required": ["fields"],
       "additionalProperties": false,
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Posición del rótulo en el plano (ej: 'inferior_derecha', 'inferior_izquierda')"
+        },
         "fields": {
           "type": "array",
           "description": "Campos del rótulo.",

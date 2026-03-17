@@ -43,7 +43,8 @@ class TestLoadBuiltinProfile:
 
     def test_iram_text_styles_count(self):
         profile = load_builtin_profile("iram_general")
-        assert len(profile.text_styles) == 5
+        # IRAM 4503 Tabla I: 7 alturas normalizadas (2.5, 3.5, 5, 7, 10, 14 mm + STD variable)
+        assert len(profile.text_styles) == 7
 
     def test_iram_paper_sizes_count(self):
         profile = load_builtin_profile("iram_general")
@@ -51,7 +52,8 @@ class TestLoadBuiltinProfile:
 
     def test_iram_scales_count(self):
         profile = load_builtin_profile("iram_general")
-        assert len(profile.drawing_scales) == 14
+        # IRAM 4505 Tabla I: 1 natural + 14 reducción + 3 ampliación = 18
+        assert len(profile.drawing_scales) == 18
 
     def test_iram_title_block_required_fields(self):
         profile = load_builtin_profile("iram_general")

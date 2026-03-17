@@ -168,6 +168,7 @@ class TitleBlockField(BaseModel):
 
 class TitleBlock(BaseModel):
     norm_ref: Optional[str] = None
+    location: Optional[str] = None
     fields: list[TitleBlockField]
 
     @field_validator("fields")
