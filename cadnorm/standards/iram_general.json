@@ -1,11 +1,11 @@
 {
   "metadata": {
     "standard_name": "IRAM",
-    "standard_version": "2001",
-    "effective_date": "2001-01-01",
-    "source": "IRAM 4503:2001 - Dibujo técnico. Formatos. IRAM 4504 - Tipos de línea. IRAM 4040 - Escalas. IRAM 4508 - Escritura. IRAM 4049 - Acotamiento.",
-    "profile_version": "1.0.0",
-    "description": "Perfil normativo IRAM para dibujo técnico de ingeniería civil y arquitectura. Cubre formatos A0-A4, tipos de línea ISO, escritura normalizada y acotamiento IRAM 4503.",
+    "standard_version": "XXVII",
+    "effective_date": "1990-01-01",
+    "source": "IRAM 4501 (Vistas — Método ISO E), IRAM 4502 (Líneas), IRAM 4503 (Letras y números), IRAM 4504 (Formatos, elementos gráficos y plegado), IRAM 4505 (Escalas lineales para construcciones civiles y mecánicas), IRAM 4507 (Secciones y cortes), IRAM 4508 (Rótulo, lista de materiales y despiezo), IRAM 4509 (Rayados indicadores de secciones y cortes), IRAM 4513 (Acotación de planos en dibujo mecánico)",
+    "profile_version": "1.1.0",
+    "description": "Perfil normativo IRAM para dibujo técnico de ingeniería civil y arquitectura. Basado en el Manual de Normas de Aplicación para Dibujo Técnico, Edición XXVII. Cubre formatos A0–A4 (IRAM 4504), tipos de línea (IRAM 4502), escritura normalizada (IRAM 4503), escalas (IRAM 4505), rótulo (IRAM 4508) y acotamiento (IRAM 4513).",
     "software_targets": ["autocad", "librecad"],
     "country": "AR"
   },
@@ -13,7 +13,7 @@
   "units": {
     "system": "metric",
     "linear_unit": "mm",
-    "linear_precision": 2,
+    "linear_precision": 0,
     "angular_unit": "degrees",
     "angular_precision": 0,
     "insertion_scale": "mm",
@@ -23,33 +23,33 @@
   "linetypes": [
     {
       "name": "CONTINUOUS",
-      "description": "Línea continua",
+      "description": "Línea continua (Tipo A gruesa / Tipo B fina)",
       "pattern": "",
-      "norm_ref": "IRAM 4504 Tipo A"
+      "norm_ref": "IRAM 4502 Tipo A / Tipo B"
     },
     {
       "name": "DASHED",
-      "description": "Línea a trazos (oculta) — — — — —",
+      "description": "Línea a trazos — aristas ocultas",
       "pattern": "A,.5,-.25",
-      "norm_ref": "IRAM 4504 Tipo E"
+      "norm_ref": "IRAM 4502 Tipo E — a trazos fina"
     },
     {
       "name": "CENTER",
-      "description": "Línea de eje — · — · — · —",
+      "description": "Línea de eje — trazo-punto fino — — · — — · —",
       "pattern": "A,1,-.25,.25,-.25",
-      "norm_ref": "IRAM 4504 Tipo G"
+      "norm_ref": "IRAM 4502 Tipo F — trazo-punto fina (ejes de simetría)"
     },
     {
       "name": "PHANTOM",
-      "description": "Línea fantasma — · · — · · —",
+      "description": "Línea fantasma — piezas adyacentes, posiciones extremas",
       "pattern": "A,1.25,-.25,.25,-.25,.25,-.25",
-      "norm_ref": "IRAM 4504 Tipo H"
+      "norm_ref": "IRAM 4502 Tipo H — dos trazos y punto"
     },
     {
       "name": "CUTTING_PLANE",
-      "description": "Plano de corte — — — · — — —",
+      "description": "Plano de corte — trazo-punto gruesa",
       "pattern": "A,1,-.25,.25,-.25",
-      "norm_ref": "IRAM 4504 Tipo J"
+      "norm_ref": "IRAM 4502 Tipo G — trazo-punto gruesa (planos de corte)"
     }
   ],
 
@@ -73,7 +73,7 @@
       "locked": false,
       "frozen": false,
       "description": "Líneas visibles principales — contornos de piezas y objetos",
-      "norm_ref": "IRAM 4504 Tipo A — espesor grueso 0.5mm"
+      "norm_ref": "IRAM 4502 Tipo A — continua gruesa 0.5mm"
     },
     {
       "name": "VL-VISIBLE-FINA",
@@ -84,7 +84,7 @@
       "locked": false,
       "frozen": false,
       "description": "Líneas visibles finas — aristas secundarias, trayectorias",
-      "norm_ref": "IRAM 4504 Tipo B — espesor fino 0.25mm"
+      "norm_ref": "IRAM 4502 Tipo B — continua fina 0.25mm"
     },
     {
       "name": "OC-OCULTA",
@@ -95,7 +95,7 @@
       "locked": false,
       "frozen": false,
       "description": "Líneas ocultas — aristas no visibles",
-      "norm_ref": "IRAM 4504 Tipo E — amarillo, a trazos"
+      "norm_ref": "IRAM 4502 Tipo E — a trazos fina, amarillo"
     },
     {
       "name": "EJ-EJE",
@@ -106,7 +106,7 @@
       "locked": false,
       "frozen": false,
       "description": "Ejes de simetría y de revolución",
-      "norm_ref": "IRAM 4504 Tipo G — rojo, trazo-punto"
+      "norm_ref": "IRAM 4502 Tipo F — trazo-punto fina, rojo"
     },
     {
       "name": "CO-COTA",
@@ -117,18 +117,18 @@
       "locked": false,
       "frozen": false,
       "description": "Cotas, líneas de extensión y auxiliares de acotamiento",
-      "norm_ref": "IRAM 4049 — verde, línea fina"
+      "norm_ref": "IRAM 4513 — verde, línea tipo B (continua fina)"
     },
     {
       "name": "CRT-CORTE",
       "color_aci": 6,
-      "linetype": "CONTINUOUS",
+      "linetype": "CUTTING_PLANE",
       "lineweight": 50,
       "plot": true,
       "locked": false,
       "frozen": false,
-      "description": "Planos de corte y sección — trazado visible en vista de corte",
-      "norm_ref": "IRAM 4504 Tipo J — magenta"
+      "description": "Planos de corte y sección",
+      "norm_ref": "IRAM 4502 Tipo G — trazo-punto gruesa, magenta"
     },
     {
       "name": "AN-ANOTACION",
@@ -139,7 +139,7 @@
       "locked": false,
       "frozen": false,
       "description": "Textos, notas, símbolos y referencias",
-      "norm_ref": "IRAM 4508 — cian, línea fina"
+      "norm_ref": "IRAM 4503 — cian, línea continua fina"
     },
     {
       "name": "HT-HACHURA",
@@ -150,7 +150,7 @@
       "locked": false,
       "frozen": false,
       "description": "Hachurados de cortes y secciones",
-      "norm_ref": "IRAM 4504 — gris, línea muy fina"
+      "norm_ref": "IRAM 4509 — gris, línea tipo B continua fina, 45°"
     },
     {
       "name": "MA-MARCO",
@@ -161,7 +161,7 @@
       "locked": false,
       "frozen": false,
       "description": "Marco del plano y borde exterior",
-      "norm_ref": "IRAM 4503 — espesor 0.7mm"
+      "norm_ref": "IRAM 4504 — espesor 0.7mm"
     },
     {
       "name": "RT-ROTULO",
@@ -172,7 +172,7 @@
       "locked": false,
       "frozen": false,
       "description": "Rótulo y carátula del plano",
-      "norm_ref": "IRAM 4503"
+      "norm_ref": "IRAM 4508"
     },
     {
       "name": "REF-REFERENCIA",
@@ -195,7 +195,7 @@
       "width_factor": 1.0,
       "oblique_angle": 0,
       "is_default": true,
-      "norm_ref": "IRAM 4508 — fuente ISO normalizada, altura variable"
+      "norm_ref": "IRAM 4503 — fuente ISO normalizada, altura variable según contexto"
     },
     {
       "name": "IRAM_H25",
@@ -204,7 +204,7 @@
       "width_factor": 1.0,
       "oblique_angle": 0,
       "is_default": false,
-      "norm_ref": "IRAM 4508 — altura 2.5mm (mínima normalizada)"
+      "norm_ref": "IRAM 4503 Tabla I — altura 2.5mm (mínima normalizada)"
     },
     {
       "name": "IRAM_H35",
@@ -213,7 +213,7 @@
       "width_factor": 1.0,
       "oblique_angle": 0,
       "is_default": false,
-      "norm_ref": "IRAM 4508 — altura 3.5mm"
+      "norm_ref": "IRAM 4503 Tabla I — altura 3.5mm"
     },
     {
       "name": "IRAM_H50",
@@ -222,7 +222,7 @@
       "width_factor": 1.0,
       "oblique_angle": 0,
       "is_default": false,
-      "norm_ref": "IRAM 4508 — altura 5.0mm (títulos)"
+      "norm_ref": "IRAM 4503 Tabla I — altura 5.0mm (títulos)"
     },
     {
       "name": "IRAM_H70",
@@ -231,7 +231,25 @@
       "width_factor": 1.0,
       "oblique_angle": 0,
       "is_default": false,
-      "norm_ref": "IRAM 4508 — altura 7.0mm (encabezados principales)"
+      "norm_ref": "IRAM 4503 Tabla I — altura 7.0mm (encabezados principales)"
+    },
+    {
+      "name": "IRAM_H100",
+      "font": "isocp.shx",
+      "height": 10.0,
+      "width_factor": 1.0,
+      "oblique_angle": 0,
+      "is_default": false,
+      "norm_ref": "IRAM 4503 Tabla I — altura 10.0mm (títulos principales)"
+    },
+    {
+      "name": "IRAM_H140",
+      "font": "isocp.shx",
+      "height": 14.0,
+      "width_factor": 1.0,
+      "oblique_angle": 0,
+      "is_default": false,
+      "norm_ref": "IRAM 4503 Tabla I — altura 14.0mm (máxima normalizada)"
     }
   ],
 
@@ -244,10 +262,10 @@
       "dimexe": 2.0,
       "dimasz": 2.5,
       "dimgap": 1.0,
-      "dimdec": 2,
+      "dimdec": 0,
       "dimtih": false,
       "dimtoh": false,
-      "dimblk": "",
+      "dimblk": "CLOSED_FILLED",
       "dimclrd": 3,
       "dimclre": 3,
       "dimclrt": 3,
@@ -255,25 +273,29 @@
       "dimlunit": 2,
       "dimadec": 0,
       "is_default": true,
-      "norm_ref": "IRAM 4049 — acotamiento normalizado"
+      "norm_ref": "IRAM 4513 — acotación normalizada. Unidad: mm (sin símbolo). Flechas sólidas. Texto 2.5mm."
     }
   ],
 
   "drawing_scales": [
-    { "label": "1:1",   "numerator": 1,  "denominator": 1,   "type": "natural",       "norm_ref": "IRAM 4040" },
-    { "label": "1:2",   "numerator": 1,  "denominator": 2,   "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:5",   "numerator": 1,  "denominator": 5,   "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:10",  "numerator": 1,  "denominator": 10,  "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:20",  "numerator": 1,  "denominator": 20,  "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:25",  "numerator": 1,  "denominator": 25,  "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:50",  "numerator": 1,  "denominator": 50,  "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:75",  "numerator": 1,  "denominator": 75,  "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:100", "numerator": 1,  "denominator": 100, "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:200", "numerator": 1,  "denominator": 200, "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "1:500", "numerator": 1,  "denominator": 500, "type": "reduction",     "norm_ref": "IRAM 4040" },
-    { "label": "2:1",   "numerator": 2,  "denominator": 1,   "type": "amplification", "norm_ref": "IRAM 4040" },
-    { "label": "5:1",   "numerator": 5,  "denominator": 1,   "type": "amplification", "norm_ref": "IRAM 4040" },
-    { "label": "10:1",  "numerator": 10, "denominator": 1,   "type": "amplification", "norm_ref": "IRAM 4040" }
+    { "label": "1:1",     "numerator": 1,  "denominator": 1,     "type": "natural",       "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:2",     "numerator": 1,  "denominator": 2,     "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:5",     "numerator": 1,  "denominator": 5,     "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:10",    "numerator": 1,  "denominator": 10,    "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:20",    "numerator": 1,  "denominator": 20,    "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:25",    "numerator": 1,  "denominator": 25,    "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I — construcciones civiles" },
+    { "label": "1:50",    "numerator": 1,  "denominator": 50,    "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:100",   "numerator": 1,  "denominator": 100,   "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:200",   "numerator": 1,  "denominator": 200,   "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:250",   "numerator": 1,  "denominator": 250,   "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I — construcciones civiles" },
+    { "label": "1:500",   "numerator": 1,  "denominator": 500,   "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:1000",  "numerator": 1,  "denominator": 1000,  "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:2000",  "numerator": 1,  "denominator": 2000,  "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:5000",  "numerator": 1,  "denominator": 5000,  "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "1:10000", "numerator": 1,  "denominator": 10000, "type": "reduction",     "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "2:1",     "numerator": 2,  "denominator": 1,     "type": "amplification", "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "5:1",     "numerator": 5,  "denominator": 1,     "type": "amplification", "norm_ref": "IRAM 4505 Tabla I" },
+    { "label": "10:1",    "numerator": 10, "denominator": 1,     "type": "amplification", "norm_ref": "IRAM 4505 Tabla I" }
   ],
 
   "paper_sizes": [
@@ -282,144 +304,147 @@
       "width_mm": 210,
       "height_mm": 297,
       "margin_left": 25,
-      "margin_right": 5,
-      "margin_top": 5,
-      "margin_bottom": 5,
+      "margin_right": 10,
+      "margin_top": 10,
+      "margin_bottom": 10,
       "orientation": "portrait",
-      "norm_ref": "IRAM 4503 — formato A4"
+      "norm_ref": "IRAM 4504 — formato A4. Margen encuadernación 25mm, resto 10mm"
     },
     {
       "name": "A4H",
       "width_mm": 297,
       "height_mm": 210,
       "margin_left": 25,
-      "margin_right": 5,
-      "margin_top": 5,
-      "margin_bottom": 5,
+      "margin_right": 10,
+      "margin_top": 10,
+      "margin_bottom": 10,
       "orientation": "landscape",
-      "norm_ref": "IRAM 4503 — formato A4 apaisado"
+      "norm_ref": "IRAM 4504 — formato A4 apaisado. Margen encuadernación 25mm, resto 10mm"
     },
     {
       "name": "A3",
       "width_mm": 420,
       "height_mm": 297,
       "margin_left": 25,
-      "margin_right": 5,
-      "margin_top": 5,
-      "margin_bottom": 5,
+      "margin_right": 10,
+      "margin_top": 10,
+      "margin_bottom": 10,
       "orientation": "landscape",
-      "norm_ref": "IRAM 4503 — formato A3"
+      "norm_ref": "IRAM 4504 — formato A3. Margen encuadernación 25mm, resto 10mm"
     },
     {
       "name": "A2",
       "width_mm": 594,
       "height_mm": 420,
       "margin_left": 25,
-      "margin_right": 5,
-      "margin_top": 5,
-      "margin_bottom": 5,
+      "margin_right": 10,
+      "margin_top": 10,
+      "margin_bottom": 10,
       "orientation": "landscape",
-      "norm_ref": "IRAM 4503 — formato A2"
+      "norm_ref": "IRAM 4504 — formato A2. Margen encuadernación 25mm, resto 10mm"
     },
     {
       "name": "A1",
       "width_mm": 841,
       "height_mm": 594,
       "margin_left": 25,
-      "margin_right": 5,
-      "margin_top": 5,
-      "margin_bottom": 5,
+      "margin_right": 10,
+      "margin_top": 10,
+      "margin_bottom": 10,
       "orientation": "landscape",
-      "norm_ref": "IRAM 4503 — formato A1"
+      "norm_ref": "IRAM 4504 — formato A1. Margen encuadernación 25mm, resto 10mm"
     },
     {
       "name": "A0",
       "width_mm": 1189,
       "height_mm": 841,
       "margin_left": 25,
-      "margin_right": 5,
-      "margin_top": 5,
-      "margin_bottom": 5,
+      "margin_right": 10,
+      "margin_top": 10,
+      "margin_bottom": 10,
       "orientation": "landscape",
-      "norm_ref": "IRAM 4503 — formato A0"
+      "norm_ref": "IRAM 4504 — formato A0. Margen encuadernación 25mm, resto 10mm"
     }
   ],
 
   "title_block": {
-    "norm_ref": "IRAM 4503 — rótulo normalizado",
+    "norm_ref": "IRAM 4508 — Rótulo, lista de materiales y despiezo",
+    "location": "inferior_derecha",
     "fields": [
-      { "id": "company",      "label": "Empresa / Estudio",   "required": false, "default": "",  "max_length": 60 },
-      { "id": "project",      "label": "Proyecto / Obra",     "required": true,  "default": "",  "max_length": 80 },
-      { "id": "title",        "label": "Título del Plano",    "required": true,  "default": "",  "max_length": 100 },
-      { "id": "drawing_no",   "label": "Número de Plano",     "required": true,  "default": "",  "max_length": 20 },
-      { "id": "scale",        "label": "Escala",              "required": true,  "default": "1:50", "max_length": 10, "norm_ref": "IRAM 4040" },
-      { "id": "date",         "label": "Fecha",               "required": true,  "default": "",  "max_length": 10 },
-      { "id": "drawn_by",     "label": "Dibujó",              "required": true,  "default": "",  "max_length": 40 },
-      { "id": "checked_by",   "label": "Verificó",            "required": false, "default": "",  "max_length": 40 },
-      { "id": "approved_by",  "label": "Aprobó",              "required": false, "default": "",  "max_length": 40 },
-      { "id": "revision",     "label": "Revisión",            "required": true,  "default": "A", "max_length": 5 },
-      { "id": "sheet",        "label": "Hoja",                "required": true,  "default": "1/1", "max_length": 10 },
+      { "id": "company",      "label": "Empresa / Estudio",   "required": false, "default": "",     "max_length": 60 },
+      { "id": "project",      "label": "Proyecto / Obra",     "required": true,  "default": "",     "max_length": 80 },
+      { "id": "title",        "label": "Denominación",        "required": true,  "default": "",     "max_length": 100 },
+      { "id": "drawing_no",   "label": "Número de Plano",     "required": true,  "default": "",     "max_length": 20 },
+      { "id": "scale",        "label": "Escala",              "required": true,  "default": "1:50", "max_length": 10, "norm_ref": "IRAM 4505" },
+      { "id": "date",         "label": "Fecha",               "required": true,  "default": "",     "max_length": 10 },
+      { "id": "drawn_by",     "label": "Dibujó",              "required": true,  "default": "",     "max_length": 40 },
+      { "id": "checked_by",   "label": "Verificó",            "required": false, "default": "",     "max_length": 40 },
+      { "id": "approved_by",  "label": "Aprobó",              "required": false, "default": "",     "max_length": 40 },
+      { "id": "revision",     "label": "Revisión",            "required": true,  "default": "A",    "max_length": 5 },
+      { "id": "sheet",        "label": "Hoja",                "required": true,  "default": "1/1",  "max_length": 10 },
+      { "id": "material",     "label": "Material",            "required": false, "default": "",     "max_length": 60, "norm_ref": "IRAM 4508 §4.2" },
+      { "id": "tolerance",    "label": "Tolerancias generales","required": false, "default": "",    "max_length": 40 },
       { "id": "standard",     "label": "Norma",               "required": false, "default": "IRAM", "max_length": 20 },
-      { "id": "notes",        "label": "Notas",               "required": false, "default": "",  "max_length": 200 }
+      { "id": "notes",        "label": "Notas",               "required": false, "default": "",     "max_length": 200 }
     ]
   },
 
   "hatch_patterns": [
     {
       "name": "ANSI31",
-      "description": "Hierro / Material general (líneas a 45°)",
+      "description": "Hierro / Material general (líneas a 45°, continua fina)",
       "angle": 45,
       "scale": 1.0,
-      "norm_ref": "IRAM 4506 / ISO 128-50"
+      "norm_ref": "IRAM 4509 — línea tipo B, ángulo 45° preferente respecto al eje o contorno"
     },
     {
       "name": "ANSI32",
       "description": "Acero",
       "angle": 45,
       "scale": 1.0,
-      "norm_ref": "IRAM 4506 / ISO 128-50"
+      "norm_ref": "IRAM 4509"
     },
     {
       "name": "ANSI37",
       "description": "Bronce / Latón / Cobre",
       "angle": 45,
       "scale": 1.0,
-      "norm_ref": "IRAM 4506"
+      "norm_ref": "IRAM 4509"
     },
     {
       "name": "AR-CONC",
       "description": "Hormigón / Concreto",
       "angle": 0,
       "scale": 1.0,
-      "norm_ref": "IRAM 4506"
+      "norm_ref": "IRAM 4509"
     },
     {
       "name": "AR-SAND",
       "description": "Tierra / Suelo natural",
       "angle": 0,
       "scale": 1.0,
-      "norm_ref": "IRAM 4506"
+      "norm_ref": "IRAM 4509"
     },
     {
       "name": "BRICK",
       "description": "Mampostería de ladrillos",
       "angle": 0,
       "scale": 1.0,
-      "norm_ref": "IRAM 4506"
+      "norm_ref": "IRAM 4509"
     },
     {
       "name": "GLASS",
       "description": "Vidrio",
       "angle": 45,
       "scale": 1.0,
-      "norm_ref": "IRAM 4506"
+      "norm_ref": "IRAM 4509"
     },
     {
       "name": "WOOD",
       "description": "Madera (veta longitudinal)",
       "angle": 0,
       "scale": 1.0,
-      "norm_ref": "IRAM 4506"
+      "norm_ref": "IRAM 4509"
     }
   ],
 
@@ -431,6 +456,6 @@
     "center_plot": true,
     "plot_hidden": false,
     "lineweight_scale": 1.0,
-    "norm_ref": "IRAM 4503 — impresión monocromática por defecto"
+    "norm_ref": "IRAM 4504 — impresión monocromática por defecto"
   }
 }
