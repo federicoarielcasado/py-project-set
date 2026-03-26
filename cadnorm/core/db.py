@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS generation_log (
 # Conexión e inicialización
 # ---------------------------------------------------------------------------
 
-def get_connection(db_path: Path | str = DEFAULT_DB_PATH) -> sqlite3.Connection:
+def get_connection(db_path: Path | str | None = None) -> sqlite3.Connection:
     """Abre (o crea) la base de datos SQLite de CADNorm.
 
     Args:
@@ -60,6 +60,8 @@ def get_connection(db_path: Path | str = DEFAULT_DB_PATH) -> sqlite3.Connection:
     Returns:
         Conexión SQLite configurada con row_factory y WAL mode.
     """
+    if db_path is None:
+        db_path = DEFAULT_DB_PATH
     db_path = Path(db_path)
     if str(db_path) != ":memory:":
         db_path.parent.mkdir(parents=True, exist_ok=True)
